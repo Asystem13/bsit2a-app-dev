@@ -1,204 +1,36 @@
 <template>
-  <div>
-    <v-row>
-      <v-col cols="12" md="3">
-        <v-card height="120" color="black">
-          <v-card-text>
-            <v-row align="center">
-              <!-- right column -->
-              <v-col>
-                <v-icon size="80">mdi-account</v-icon>
-              </v-col>
+  <div class="d-flex justify-center align-center" style="height: 100vh">
 
-              <!-- left column -->
-              <v-col>
-                <v-row no-gutters>
-                  <v-col cols="12" class="text-right text-h5">Student</v-col>
-                  <v-col cols="12" class="text-right text-h3">120</v-col>
-
-                </v-row>
-              </v-col>
-
-            </v-row>
-          </v-card-text>
-
-
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="3">
-        <v-card height="120" color="red">
-          <v-card-text>
-            <v-row align="center">
-              <!-- right column -->
-              <v-col>
-                <v-icon size="80">mdi-home</v-icon>
-              </v-col>
-
-              <!-- left column -->
-              <v-col>
-                <v-row no-gutters>
-                  <v-col cols="12" class="text-right text-h5">Student</v-col>
-                  <v-col cols="12" class="text-right text-h3">120</v-col>
-
-                </v-row>
-              </v-col>
-
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="3">
-        <v-card height="120" color="pink">
-          <v-card-text>
-            <v-row align="center">
-              <!-- right column -->
-              <v-col>
-                <v-icon size="80">mdi-cash</v-icon>
-              </v-col>
-
-              <!-- left column -->
-              <v-col>
-                <v-row no-gutters>
-                  <v-col cols="12" class="text-right text-h5">Student</v-col>
-                  <v-col cols="12" class="text-right text-h3">120</v-col>
-
-                </v-row>
-              </v-col>
-
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="3">
-        <v-card height="120" color="blue">
-          <v-card-text>
-            <v-row align="center">
-              <!-- right column -->
-              <v-col>
-                <v-icon size="80">mdi-human</v-icon>
-              </v-col>
-
-              <!-- left column -->
-              <v-col>
-                <v-row no-gutters>
-                  <v-col cols="12" class="text-right text-h5">Student</v-col>
-                  <v-col cols="12" class="text-right text-h3">120</v-col>
-
-                </v-row>
-              </v-col>
-
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="8">
-    <v-card  height="400" color="#EEEEEE">
-      <v-table density="compact">
-    <thead>
-      <tr>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Calories
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="item in desserts"
-        :key="item.name"
-      >
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+    <v-card width="400"  class="text-center" elevation="11">
+      <!-- LOGO -->
+       <v-icon size="90" color="pink" class="pt-10">mdi-apple</v-icon>
+      <v-card-text class="py-10">
+        <!-- Username TextField -->
+        <v-text-field variant="outlined" v-model="username" flat label="Username" prepend-inner-icon="mdi-account" clearable></v-text-field>
+        <!-- Password TextField -->
+        <v-text-field variant="outlined" v-model="password" flat label="Password" prepend-inner-icon="mdi-lock" type="Password" clearable></v-text-field>
+        <!-- Signin Button -->
+        <v-btn color="primary" @click="login()" block="">Sign In</v-btn>
+      </v-card-text>
     </v-card>
-    </v-col>
-    
-    <v-row>
-      <v-col>
 
-     <v-col cols="12" md="12">
-    <v-card  height="140" color="#EEEEEE">
-      
-    </v-card>
-    </v-col>
-
-    <v-col cols="12" md="12">
-    <v-card  height="140" color="#EEEEEE"></v-card>
-    </v-col>
-
-    <v-col cols="12" md="12">
-    <v-card  height="140" color="#EEEEEE"></v-card>
-    </v-col>
-    
-    </v-col>
-   </v-row>
-
-    </v-row>
-
-  
-    
-
-    
   </div>
 </template>
-
 <script setup>
-import { ref } from 'vue'
+definePageMeta({
+  layout: 'auth',
+});
 
-  const desserts = ref([
-    {
-      name: 'Frozen Yogurt',
-      calories: 159,
-    },
-    {
-      name: 'Ice cream sandwich',
-      calories: 237,
-    },
-    {
-      name: 'Eclair',
-      calories: 262,
-    },
-    {
-      name: 'Cupcake',
-      calories: 305,
-    },
-    {
-      name: 'Gingerbread',
-      calories: 356,
-    },
-    {
-      name: 'Jelly bean',
-      calories: 375,
-    },
-    {
-      name: 'Lollipop',
-      calories: 392,
-    },
-    {
-      name: 'Honeycomb',
-      calories: 408,
-    },
-    {
-      name: 'Donut',
-      calories: 452,
-    },
-    {
-      name: 'KitKat',
-      calories: 518,
-    },
-  ])
+const defaultUsername = ref("admin");
+const defaultPassword = ref("admin123")
+const username = ref("")
+const password = ref("")
 
+
+// Regular Function
+function login() {
+alert ("Login function called ")
+
+}
 
 </script>
-
-<style>
-
-</style>
